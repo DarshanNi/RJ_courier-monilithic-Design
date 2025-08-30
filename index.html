@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RJCouriers - Package Delivery System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <!-- Navigation Header -->
+  <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-yellow-500 p-2 rounded-lg">
+                        <svg class="w-8 h-8 text-blue-900" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-2xl font-bold">RJCouriers</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userInfo" class="text-sm">Welcome, Guest</span>
+                    <button onclick="toggleUserMode()" id="userModeBtn" class="bg-yellow-500 text-blue-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                        Switch to Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Main Menu -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Main Menu</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <button onclick="showSection('home')"
+          class="menu-btn bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
+          <span class="text-sm font-medium">Home</span>
+        </button>
+        <button onclick="showSection('booking')"
+          class="menu-btn bg-green-600 hover:bg-green-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" />
+          </svg>
+          <span class="text-sm font-medium">Book Package</span>
+        </button>
+        <button onclick="showSection('bookings')"
+          class="menu-btn bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+            <path fill-rule="evenodd"
+              d="M4 5a2 2 0 012-2v1a2 2 0 002 2h4a2 2 0 002-2V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" />
+          </svg>
+          <span class="text-sm font-medium">All Bookings</span>
+        </button>
+        <button onclick="showSection('payment')"
+          class="menu-btn bg-yellow-600 hover:bg-yellow-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+            <path fill-rule="evenodd"
+              d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
+          </svg>
+          <span class="text-sm font-medium">Payment</span>
+        </button>
+        <button onclick="showSection('track')"
+          class="menu-btn bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+          </svg>
+          <span class="text-sm font-medium">Track Package</span>
+        </button>
+        <button onclick="showSection('admin')" id="adminBtn"
+          class="menu-btn bg-gray-600 hover:bg-gray-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2"
+          style="display: none;">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" />
+          </svg>
+          <span class="text-sm font-medium">Admin</span>
+        </button>
+        <button onclick="showSection('reports')" id="reportsBtn"
+          class="menu-btn bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-lg transition-colors flex flex-col items-center space-y-2"
+          style="display: none;">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+          </svg>
+          <span class="text-sm font-medium">Reports</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Content Sections -->
+    <div id="content" class="bg-white rounded-xl shadow-lg p-6 fade-in">
+      <!-- Home Section -->
+      <div id="homeSection" class="section">
+        <div class="text-center mb-8">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">Welcome to RJCouriers</h2>
+          <p class="text-xl text-gray-600 mb-8">Fast, Reliable, and Secure Package Delivery Services</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div class="text-center p-6 bg-blue-50 rounded-lg">
+            <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+            <p class="text-gray-600">Round-the-clock customer service for all your delivery needs</p>
+          </div>
+
+          <div class="text-center p-6 bg-green-50 rounded-lg">
+            <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Secure Delivery</h3>
+            <p class="text-gray-600">Your packages are safe with our advanced tracking system</p>
+          </div>
+
+          <div class="text-center p-6 bg-yellow-50 rounded-lg">
+            <div class="bg-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+            <p class="text-gray-600">Express delivery options available for urgent packages</p>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-lg text-center">
+          <h3 class="text-2xl font-bold mb-4">Ready to Send a Package?</h3>
+          <p class="mb-6">Get started with our easy booking system</p>
+          <button onclick="showSection('booking')"
+            class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Booking Section -->
+      <div id="bookingSection" class="section" style="display: none;">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Book a Package</h2>
+        <form id="bookingForm" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-xl font-semibold mb-4 text-gray-700">Sender Information</h3>
+              <div class="space-y-4">
+                <input type="text" id="senderName" placeholder="Sender Name"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required>
+                <input type="tel" id="senderPhone" placeholder="Sender Phone"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required>
+                <textarea id="senderAddress" placeholder="Sender Address" rows="3"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required></textarea>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-semibold mb-4 text-gray-700">Receiver Information</h3>
+              <div class="space-y-4">
+                <input type="text" id="receiverName" placeholder="Receiver Name"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required>
+                <input type="tel" id="receiverPhone" placeholder="Receiver Phone"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required>
+                <textarea id="receiverAddress" placeholder="Receiver Address" rows="3"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Package Type</label>
+              <select id="packageType"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required>
+                <option value="">Select Type</option>
+                <option value="document">Document</option>
+                <option value="parcel">Parcel</option>
+                <option value="fragile">Fragile Item</option>
+                <option value="electronics">Electronics</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+              <input type="number" id="weight" placeholder="0.0" step="0.1"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Type</label>
+              <select id="deliveryType"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required>
+                <option value="">Select Delivery</option>
+                <option value="standard">Standard (3-5 days)</option>
+                <option value="express">Express (1-2 days)</option>
+                <option value="overnight">Overnight</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Package Description</label>
+            <textarea id="packageDescription" placeholder="Brief description of package contents" rows="3"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-gray-700 mb-2">Estimated Cost: <span id="estimatedCost"
+                class="text-green-600">$0.00</span></h4>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            Book Package
+          </button>
+        </form>
+      </div>
+
+      <!-- All Bookings Section -->
+      <div id="bookingsSection" class="section" style="display: none;">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">All Bookings</h2>
+        <div class="mb-4 flex flex-wrap gap-2">
+          <button onclick="filterBookings('all')"
+            class="filter-btn bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">All</button>
+          <button onclick="filterBookings('pending')"
+            class="filter-btn bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">Pending</button>
+          <button onclick="filterBookings('in-transit')"
+            class="filter-btn bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">In
+            Transit</button>
+          <button onclick="filterBookings('delivered')"
+            class="filter-btn bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">Delivered</button>
+        </div>
+        <div id="bookingsList" class="space-y-4">
+          <!-- Bookings will be populated here -->
+        </div>
+      </div>
+
+      <!-- Payment Section -->
+      <div id="paymentSection" class="section" style="display: none;">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Payment Options</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Select Booking to Pay</h3>
+            <select id="paymentBookingSelect"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4">
+              <option value="">Select a booking</option>
+            </select>
+
+            <div id="paymentDetails" class="bg-gray-50 p-4 rounded-lg mb-6" style="display: none;">
+              <h4 class="font-semibold mb-2">Payment Details</h4>
+              <div id="paymentInfo"></div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-4">Payment Method</h3>
+            <div class="space-y-3">
+              <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                <input type="radio" name="paymentMethod" value="credit" class="mr-3">
+                <div class="flex items-center">
+                  <div class="bg-blue-600 text-white p-2 rounded mr-3">💳</div>
+                  <span>Credit/Debit Card</span>
+                </div>
+              </label>
+
+              <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                <input type="radio" name="paymentMethod" value="paypal" class="mr-3">
+                <div class="flex items-center">
+                  <div class="bg-yellow-500 text-white p-2 rounded mr-3">🏦</div>
+                  <span>PayPal</span>
+                </div>
+              </label>
+
+              <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                <input type="radio" name="paymentMethod" value="cash" class="mr-3">
+                <div class="flex items-center">
+                  <div class="bg-green-600 text-white p-2 rounded mr-3">💵</div>
+                  <span>Cash on Delivery</span>
+                </div>
+              </label>
+
+              <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                <input type="radio" name="paymentMethod" value="bank" class="mr-3">
+                <div class="flex items-center">
+                  <div class="bg-purple-600 text-white p-2 rounded mr-3">🏛️</div>
+                  <span>Bank Transfer</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <div id="paymentForm" class="bg-gray-50 p-6 rounded-lg" style="display: none;">
+              <h3 class="text-xl font-semibold mb-4">Payment Information</h3>
+              <div id="paymentFormContent">
+                <!-- Payment form will be populated based on selected method -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="processPayment()" id="payButton"
+          class="mt-6 bg-green-600 text-white py-3 px-8 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+          style="display: none;">
+          Process Payment
+        </button>
+      </div>
+
+      <!-- Track Package Section -->
+      <div id="trackSection" class="section" style="display: none;">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Track Your Package</h2>
+        <div class="mb-8">
+          <div class="flex gap-4">
+            <input type="text" id="trackingNumber" placeholder="Enter tracking number (e.g., RJ001)"
+              class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <button onclick="trackPackage()"
+              class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              Track Package
+            </button>
+          </div>
+        </div>
+
+        <div id="trackingResult" style="display: none;">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <div id="trackingInfo" class="mb-6">
+              <!-- Tracking info will be populated here -->
+            </div>
+
+            <div class="relative">
+              <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+              <div id="trackingSteps" class="space-y-6">
+                <!-- Tracking steps will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Section -->
+      <div id="adminSection" class="section" style="display: none;">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Admin Management</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-blue-800 mb-2">Total Bookings</h3>
+            <p class="text-3xl font-bold text-blue-600" id="totalBookings">0</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-green-800 mb-2">Delivered</h3>
+            <p class="text-3xl font-bold text-green-600" id="deliveredCount">0</p>
+          </div>
+          <div class="bg-yellow-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-yellow-800 mb-2">In Transit</h3>
+            <p class="text-3xl font-bold text-yellow-600" id="inTransitCount">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg">
+          <div class="p-6 border-b border-gray-200">
+            <h3 class="text-xl font-semibold">Manage Bookings</h3>
+          </div>
+          <div class="p-6">
+            <div id="adminBookingsList">
+              <!-- Admin bookings list will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Section -->
+      <div id="reportsSection" class="section" style="display: none;">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Reports & Analytics</h2>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-semibold mb-4">Delivery Statistics</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between">
+                <span>Success Rate:</span>
+                <span class="font-semibold text-green-600">98.5%</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Average Delivery Time:</span>
+                <span class="font-semibold">2.3 days</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Customer Satisfaction:</span>
+                <span class="font-semibold text-blue-600">4.8/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-semibold mb-4">Revenue Summary</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between">
+                <span>Today:</span>
+                <span class="font-semibold text-green-600">$1,245</span>
+              </div>
+              <div class="flex justify-between">
+                <span>This Week:</span>
+                <span class="font-semibold text-green-600">$8,730</span>
+              </div>
+              <div class="flex justify-between">
+                <span>This Month:</span>
+                <span class="font-semibold text-green-600">$34,560</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+          <div id="recentActivity" class="space-y-3">
+            <!-- Recent activity will be populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'976fb3f395148ee2',t:'MTc1NjUwODgyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();
+
+  </script>
+</body>
+
+</html>
